@@ -6,7 +6,7 @@ Welcome to the official repository for [omhackz.github.io](https://omhackz.githu
 This is a temporary landing page for the OmHackz project.
 
 ## Logo
-![OmHackz Logo](logo.svg)
+![OmHackz Logo](icon.svg)
 
 ## License
 This project is open-source.
