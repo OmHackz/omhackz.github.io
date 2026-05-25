@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OMHACKZ — developer portfolio, projects & experiments.">
+  <title>OMHACKZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon inline SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text y='22' x='4' font-size='18' fill='%23ff6a00' font-family='monospace' font-weight='bold'>O</text></svg>">
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo">
+    <span class="bracket">[</span>OMHACKZ<span class="bracket">]</span>
+    <span class="dot"></span>
+  </div>
+
+  <div class="nav-links">
+    <a href="/" data-page="home">Home</a>
+    <a href="#portfolio" data-page="portfolio">Portfolio</a>
+    <a href="#projects" data-page="projects">Projects</a>
+    <a href="#info" data-page="info">Info</a>
+  </div>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav -->
+<div class="nav-mobile" id="nav-mobile">
+  <a href="/" data-page="home">Home</a>
+  <a href="#portfolio" data-page="portfolio">Portfolio</a>
+  <a href="#projects" data-page="projects">Projects</a>
+  <a href="#info" data-page="info">Info</a>
+</div>
+
+
+<!-- ══ HOME ═════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="container" style="position:relative;z-index:1">
+      <div class="hero-eyebrow">developer &amp; builder</div>
+      <div class="hero-name">
+        OMH<span class="accent">AC</span>KZ<span class="underscore"></span>
+      </div>
+      <p class="hero-tagline">
+        Building <strong>tools, mods &amp; experiments</strong>.<br>
+        Open source. Always iterating.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projects" data-page="projects">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          View Projects
+        </a>
+        <a class="btn btn-outline" href="#portfolio" data-page="portfolio">Portfolio →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="num" id="stat-repos">—</span>
+          <span class="lbl">Repositories</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num" id="stat-stars">—</span>
+          <span class="lbl">Stars</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num" id="stat-langs">—</span>
+          <span class="lbl">Languages</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-label">pinned work</div>
+      <h2 class="section-title">Recent Projects</h2>
+      <div class="featured-grid" id="featured-grid">
+        <!-- populated by JS or default placeholders -->
+        <div class="featured-card">
+          <div class="fc-lang">loading</div>
+          <div class="fc-name">Fetching repositories…</div>
+          <div class="fc-desc">GitHub data will appear shortly.</div>
+        </div>
+      </div>
+      <div style="margin-top:32px">
+        <a class="btn btn-outline" href="#projects" data-page="projects">All Projects →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">© 2025 <span>OMHACKZ</span> · Built with HTML/CSS/JS</div>
+    <div class="footer-links">
+      <a href="https://github.com/omhackz" target="_blank" rel="noopener">GitHub</a>
+      <a href="#info" data-page="info">Contact</a>
+    </div>
+  </footer>
+
+</div><!-- /home -->
+
+
+<!-- ══ PORTFOLIO ════════════════════════════════════ -->
+<div id="page-portfolio" class="page">
+
+  <section class="portfolio-header">
+    <div class="container">
+      <div class="section-label">work &amp; skills</div>
+      <h1 class="section-title">Portfolio</h1>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="portfolio-section">
+    <div class="container">
+      <div class="section-label">technical skills</div>
+      <h2 class="section-title" style="font-size:1.8rem">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-chip">Java</div>
+        <div class="skill-chip">C / C++</div>
+        <div class="skill-chip">Python</div>
+        <div class="skill-chip">JavaScript</div>
+        <div class="skill-chip">HTML / CSS</div>
+        <div class="skill-chip">Minecraft API</div>
+        <div class="skill-chip">Fabric SDK</div>
+        <div class="skill-chip">Win32 API</div>
+        <div class="skill-chip">MinGW / GCC</div>
+        <div class="skill-chip">Git / GitHub</div>
+        <div class="skill-chip">GitHub Pages</div>
+        <div class="skill-chip">REST APIs</div>
+      </div>
+      <div class="placeholder-note">more skills to be documented here.</div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="portfolio-section">
+    <div class="container">
+      <div class="section-label">history</div>
+      <h2 class="section-title" style="font-size:1.8rem">Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="ti-period">2024 — Present</div>
+          <div class="ti-title">Independent Developer</div>
+          <div class="ti-org">Open Source / Personal Projects</div>
+          <div class="ti-desc">
+            Building client-side Minecraft mods, native Windows utilities,
+            and developer tools. Focused on performance, clean APIs, and
+            practical end-user features.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="ti-period">Ongoing</div>
+          <div class="ti-title">Mod Developer — Om's Utilities</div>
+          <div class="ti-org">Fabric / Minecraft 1.21.x</div>
+          <div class="ti-desc">
+            Developed a full Fabric client-side mod featuring HotWords chat
+            expansion, in-game Markdown note-taking GUI, Cloth Config integration,
+            and Mod Menu compatibility.
+          </div>
+        </div>
+      </div>
+      <div class="placeholder-note">additional experience entries coming soon.</div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section class="portfolio-section" style="border-bottom:none">
+    <div class="container">
+      <div class="section-label">milestones</div>
+      <h2 class="section-title" style="font-size:1.8rem">Achievements</h2>
+      <div class="achievements-grid">
+        <div class="achievement-card">
+          <div class="ac-icon">⚡</div>
+          <div class="ac-title">NetTester</div>
+          <div class="ac-sub">Native Win32 C++ GUI network diagnostic tool with real-time metrics</div>
+        </div>
+        <div class="achievement-card">
+          <div class="ac-icon">🧩</div>
+          <div class="ac-title">Om's Utilities Mod</div>
+          <div class="ac-sub">Full Fabric 1.21.1 client mod with HotWords + Markdown notes</div>
+        </div>
+        <div class="achievement-card">
+          <div class="ac-icon">🛠️</div>
+          <div class="ac-title">USB Capacity Tester</div>
+          <div class="ac-sub">Cross-platform Python tool with chunked writes &amp; progress tracking</div>
+        </div>
+        <div class="achievement-card" style="border-style:dashed;opacity:0.5">
+          <div class="ac-icon">◻️</div>
+          <div class="ac-title">Coming Soon</div>
+          <div class="ac-sub">More milestones to be added here</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">© 2025 <span>OMHACKZ</span></div>
+    <div class="footer-links">
+      <a href="/" data-page="home">Home</a>
+      <a href="#projects" data-page="projects">Projects</a>
+    </div>
+  </footer>
+
+</div><!-- /portfolio -->
+
+
+<!-- ══ PROJECTS ══════════════════════════════════════ -->
+<div id="page-projects" class="page">
+
+  <section class="projects-header">
+    <div class="container">
+      <div class="section-label">github · omhackz</div>
+      <h1 class="section-title">Projects</h1>
+      <p style="margin-top:12px;color:var(--muted);font-size:0.88rem;max-width:460px">
+        Repositories fetched live from GitHub. Cards marked
+        <span style="color:var(--accent);border:1px solid var(--accent);padding:1px 6px;font-family:var(--font-mono);font-size:0.7rem;border-radius:2px">LIVE</span>
+        include a <code style="color:var(--muted)">site.link</code> file with a deployed URL.
+      </p>
+    </div>
+  </section>
+
+  <div class="container" style="padding-top:0;padding-bottom:0">
+    <div class="projects-grid" id="projects-container">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <footer style="margin-top:80px">
+    <div class="footer-brand">© 2025 <span>OMHACKZ</span></div>
+    <div class="footer-links">
+      <a href="/" data-page="home">Home</a>
+      <a href="https://github.com/omhackz" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div><!-- /projects -->
+
+
+<!-- ══ INFO ══════════════════════════════════════════ -->
+<div id="page-info" class="page">
+
+  <section class="info-header">
+    <div class="container">
+      <div class="section-label">about &amp; contact</div>
+      <h1 class="section-title">Info</h1>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="info-layout">
+
+      <!-- About -->
+      <div class="info-block">
+        <div class="section-label">about me</div>
+        <div class="info-body">
+          <p>
+            Hi, I'm <strong>Om</strong> — a developer who builds things that are
+            useful, fast, and occasionally overengineered in the best way.
+          </p>
+          <p>
+            I work across the stack: from native <strong>Win32 C++</strong> desktop
+            apps to <strong>Minecraft Fabric mods</strong> to web tools and automation
+            scripts. I care about performance, clean APIs, and shipping things that
+            actually work.
+          </p>
+          <p>
+            Currently based in <strong>Kolkata, India</strong>. Open to collaboration
+            and interesting projects.
+          </p>
+          <div class="placeholder-note">extended bio coming soon.</div>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="info-block">
+        <div class="section-label">links</div>
+        <div class="links-grid">
+          <a class="link-row" href="https://github.com/omhackz" target="_blank" rel="noopener">
+            <span class="lr-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;margin-right:8px;vertical-align:middle"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </span>
+            <span class="lr-url">github.com/omhackz</span>
+          </a>
+          <a class="link-row" href="https://omhackz.pages.dev" target="_blank" rel="noopener">
+            <span class="lr-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;margin-right:8px;vertical-align:middle"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              Website
+            </span>
+            <span class="lr-url">omhackz.pages.dev</span>
+          </a>
+          <div class="link-row" style="opacity:0.4;cursor:default">
+            <span class="lr-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;margin-right:8px;vertical-align:middle"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Email
+            </span>
+            <span class="lr-url">coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="info-block">
+        <div class="section-label">get in touch</div>
+        <form class="contact-form" onsubmit="return false">
+          <div class="cf-field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" placeholder="Your name" autocomplete="off">
+          </div>
+          <div class="cf-field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" placeholder="your@email.com" autocomplete="off">
+          </div>
+          <div class="cf-field">
+            <label for="cf-msg">Message</label>
+            <textarea id="cf-msg" placeholder="What's on your mind?"></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:fit-content" onclick="alert('Contact form placeholder — wire up to your preferred service.')">
+            Send Message
+          </button>
+        </form>
+        <div class="placeholder-note" style="margin-top:16px">contact form requires a backend endpoint or Formspree/Netlify Forms integration.</div>
+      </div>
+
+      <!-- Stack -->
+      <div class="info-block">
+        <div class="section-label">this site</div>
+        <div class="info-body">
+          <p>Built with <strong>vanilla HTML, CSS &amp; JavaScript</strong> — no frameworks, no bundlers, no build step. Hosted on <strong>GitHub Pages</strong>.</p>
+          <p>GitHub data is fetched live from the <strong>GitHub REST API v3</strong>. The <code style="color:var(--accent)">site.link</code> convention is a lightweight way to annotate repos with a live URL and enhanced metadata without external services.</p>
+        </div>
+        <div style="margin-top:24px;display:flex;flex-direction:column;gap:8px">
+          <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--muted2);display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+            <span>Framework</span><span style="color:var(--muted)">none</span>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--muted2);display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+            <span>Hosting</span><span style="color:var(--muted)">GitHub Pages</span>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--muted2);display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+            <span>API</span><span style="color:var(--muted)">GitHub REST v3</span>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--muted2);display:flex;justify-content:space-between;padding:8px 0">
+            <span>Fonts</span><span style="color:var(--muted)">Share Tech Mono + Barlow</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer style="margin-top:40px">
+    <div class="footer-brand">© 2025 <span>OMHACKZ</span></div>
+    <div class="footer-links">
+      <a href="/" data-page="home">Home</a>
+      <a href="#projects" data-page="projects">Projects</a>
+      <a href="https://github.com/omhackz" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div><!-- /info -->
+
+
+<script src="js/main.js"></script>
+
+<script>
+// Pull live stats for hero section
+(async function() {
+  try {
+    const repos = await (typeof fetchRepos === 'function' ? fetchRepos() : Promise.reject());
+    const owned = repos.filter(r => !r.fork);
+    const stars = owned.reduce((s, r) => s + r.stargazers_count, 0);
+    const langs = new Set(owned.map(r => r.language).filter(Boolean)).size;
+    document.getElementById('stat-repos').textContent = owned.length;
+    document.getElementById('stat-stars').textContent = stars;
+    document.getElementById('stat-langs').textContent = langs;
+  } catch {}
+})();
+</script>
+
+</body>
+</html>
