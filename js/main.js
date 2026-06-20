@@ -22,11 +22,11 @@ function navigate(id) {
   closeMobileMenu();
   window.scrollTo({ top: 0, behavior: 'instant' });
   if (id === 'projects') initProjects();
-  history.replaceState({}, '', id === 'home' ? '/' : `#${id}`);
+  history.replaceState({}, '', `#${id}`);
 }
 
 function routeFromHash() {
-  const hash = location.hash.replace('#', '');
+  const hash = location.hash.replace('#', '') || 'home';
   navigate(pages.includes(hash) ? hash : 'home');
 }
 
@@ -241,7 +241,7 @@ function timeAgo(dateStr) {
 }
 
 /* ── BOOT ────────────────────────────────────────── */
-window.addEventListener('popstate', routeFromHash);
+window.addEventListener('hashchange', routeFromHash);
 routeFromHash();
 
 // Load repo stats and featured cards on first visit, even if user stays on home
