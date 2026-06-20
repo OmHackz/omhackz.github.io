@@ -664,27 +664,94 @@ body::before {
 .links-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   margin-top: 24px;
 }
 .link-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   padding: 14px 16px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  background: var(--surface);
   transition: border-color 0.2s, background 0.2s;
 }
 .link-row:hover {
   border-color: var(--accent);
-  background: rgba(255,106,0,0.04);
+  background: rgba(255,106,0,0.06);
 }
-.link-row .lr-label { color: var(--muted); }
-.link-row .lr-url { color: var(--accent); }
-.link-row svg { width: 14px; height: 14px; color: var(--muted2); }
+.link-row .lr-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted2);
+}
+.link-row .lr-icon svg {
+  width: 18px;
+  height: 18px;
+}
+.link-row .lr-label {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.link-row .lr-url {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.icon-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.icon-link {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--muted2);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  position: relative;
+}
+.icon-link:hover {
+  border-color: var(--accent);
+  background: rgba(255,106,0,0.08);
+  color: var(--accent);
+}
+.icon-link svg {
+  width: 20px;
+  height: 20px;
+}
+.icon-link.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .contact-form {
   margin-top: 24px;

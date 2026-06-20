@@ -1,5 +1,6 @@
 /* ── OMHACKZ MAIN JS ─────────────────────────────── */
 const GITHUB_USERNAME = 'omhackz';
+const MAX_REPO_CHECK = 25;
 const LANG_COLORS = {
   JavaScript: '#f1e05a', TypeScript: '#3178c6', Python: '#3572A5',
   Java: '#b07219', Kotlin: '#A97BFF', C: '#555555', 'C++': '#f34b7d',
@@ -58,22 +59,34 @@ let projectsInitialized = false;
 
 async function fetchRepos() {
   if (reposCache) return reposCache;
-  const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`);
-  if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+  const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`, {
+    headers: { Accept: 'application/vnd.github.v3+json' },
+  });
+  if (!res.ok) {
+    if (res.status === 403) {
+      throw new Error('GitHub API error: 403 (rate limit or blocked request). Please try again later.');
+    }
+    throw new Error(`GitHub API error: ${res.status}`);
+  }
   reposCache = await res.json();
   return reposCache;
 }
 
-async function fetchSiteLink(repo) {
-  try {
-    const res = await fetch(
-      `https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/contents/site.link`,
-      { headers: { Accept: 'application/vnd.github.v3.raw' } }
-    );
-    if (!res.ok) return null;
-    const text = await res.text();
-    return parseSiteLink(text.trim());
-  } catch { return null; }
+async function fetchSiteFile(repo) {
+  const filenames = ['site.live', 'site.link'];
+  for (const filename of filenames) {
+    try {
+      const rawUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/${repo.default_branch}/${filename}`;
+      const res = await fetch(rawUrl);
+      if (!res.ok) continue;
+      const text = await res.text();
+      const site = parseSiteLink(text.trim());
+      if (site?.url) return site;
+    } catch {
+      continue;
+    }
+  }
+  return null;
 }
 
 function parseSiteLink(text) {
@@ -102,25 +115,33 @@ async function initProjects() {
 
   try {
     const repos = await fetchRepos();
-    const filtered = repos.filter(r => !r.fork).sort((a, b) => b.stargazers_count - a.stargazers_count);
+    const filtered = repos
+      .filter(r => !r.fork)
+      .sort((a, b) => b.stargazers_count - a.stargazers_count)
+      .slice(0, MAX_REPO_CHECK);
 
-    // Fetch site.link for all repos in parallel (capped)
-    const siteLinks = await Promise.all(filtered.map(r => fetchSiteLink(r)));
+    const liveRepos = [];
+    for (const repo of filtered) {
+      const siteLink = await fetchSiteFile(repo);
+      if (siteLink) liveRepos.push({ repo, siteLink });
+      if (liveRepos.length >= 6) break;
+    }
 
     container.innerHTML = '';
 
-    if (filtered.length === 0) {
-      container.innerHTML = '<div class="projects-state">no repositories found.</div>';
+    if (liveRepos.length === 0) {
+      container.innerHTML = '<div class="projects-state">no live repositories found.</div>';
+      updateStats([]);
       return;
     }
 
-    filtered.forEach((repo, i) => {
-      const sl = siteLinks[i];
-      container.appendChild(buildCard(repo, sl));
+    liveRepos.forEach(item => {
+      container.appendChild(buildCard(item.repo, item.siteLink));
     });
 
-    // Update home page featured too
-    updateFeatured(filtered, siteLinks);
+    const reposForStats = liveRepos.map(item => item.repo);
+    updateFeatured(reposForStats, liveRepos.map(item => item.siteLink));
+    updateStats(reposForStats);
 
   } catch (err) {
     container.innerHTML = `<div class="projects-state error">
@@ -158,7 +179,7 @@ function buildCard(repo, siteLink) {
           </svg>
           ${repo.stargazers_count}
         </span>` : ''}
-      ${siteLink?.url ? `<a class="pc-link" href="${siteLink.url}" target="_blank" rel="noopener">live →</a>` : ''}
+      ${siteLink?.url ? `<a class="pc-link" href="${siteLink.url}" target="_blank" rel="noopener">View</a>` : ''}
     </div>`;
   return card;
 }
@@ -185,7 +206,7 @@ function updateFeatured(repos, siteLinks) {
           ${repo.stargazers_count}
         </span>
         <span>updated ${timeAgo(repo.pushed_at)}</span>
-        ${sl?.url ? `<a href="${sl.url}" target="_blank" rel="noopener" style="color:var(--accent);margin-left:auto">live ↗</a>` : ''}
+        ${sl?.url ? `<a href="${sl.url}" target="_blank" rel="noopener" style="color:var(--accent);margin-left:auto">View ↗</a>` : ''}
       </div>`;
     card.style.cursor = 'pointer';
     card.addEventListener('click', () => navigate('projects'));
@@ -197,6 +218,16 @@ function updateFeatured(repos, siteLinks) {
 function escHtml(s) {
   if (!s) return '';
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function updateStats(repos) {
+  const repoCount = repos.length;
+  const starCount = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+  const languages = [...new Set(repos.filter(repo => repo.language).map(repo => repo.language))];
+
+  document.getElementById('stat-repos').textContent = repoCount;
+  document.getElementById('stat-stars').textContent = starCount;
+  document.getElementById('stat-langs').textContent = languages.length;
 }
 
 function timeAgo(dateStr) {
@@ -212,6 +243,9 @@ function timeAgo(dateStr) {
 /* ── BOOT ────────────────────────────────────────── */
 window.addEventListener('popstate', routeFromHash);
 routeFromHash();
+
+// Load repo stats and featured cards on first visit, even if user stays on home
+initProjects().catch(() => {});
 
 // Prefetch repos in background after a short delay
 setTimeout(() => {
