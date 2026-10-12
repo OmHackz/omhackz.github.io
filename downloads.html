@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Downloads — OmHackz</title>
+  <meta name="description" content="Downloads by OmHackz — tools, configs and resources." />
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="downloads">
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="stage" aria-hidden="true">
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+  </div>
+
+  <header class="nav-wrap">
+    <nav class="glass-nav" aria-label="Primary">
+      <a href="index.html" class="brand" aria-label="Home">
+        <span class="brand-mark"><img src="assets/icon.png" alt="OmHackz logo" /></span>
+        <span class="brand-text">OmHackz</span>
+      </a>
+      <div class="links" id="navLinks">
+        <span class="nav-indicator" id="navIndicator"></span>
+        <a href="index.html" class="nav-link" data-page="home">Home</a>
+        <a href="projects.html" class="nav-link" data-page="projects">Projects</a>
+        <a href="downloads.html" class="nav-link is-active" data-page="downloads">Downloads</a>
+        <a href="about.html" class="nav-link" data-page="about">About</a>
+        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="login.html" class="login-btn" id="navAuth" aria-label="Sign in">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6" /><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5" /></svg>
+          <span>Login</span>
+        </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Toggle theme">
+          <span class="toggle-track">
+            <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.4M12 19.1v2.4M4.3 4.3l1.7 1.7M18 18l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.3 19.7L6 18M18 6l1.7-1.7" /></svg>
+            <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.5A8.5 8.5 0 0 1 9.5 3.6a8.5 8.5 0 1 0 10.9 10.9Z" /></svg>
+          </span>
+        </button>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+    <div class="mobile-panel" id="mobilePanel">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="downloads.html" class="nav-link is-active">Downloads</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+  </header>
+
+  <main id="app">
+    <section class="page">
+      <div class="page-head reveal">
+        <p class="eyebrow">Downloads</p>
+        <h2 class="page-title">Tools &amp; <span class="gradient-text">resources</span></h2>
+        <p class="page-sub">Live from the shelf — search, filter by file type, open anything for details.</p>
+      </div>
+
+      <div class="dl-toolbar reveal d1">
+        <label class="dl-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <input id="dlSearch" type="search" placeholder="Search downloads…" autocomplete="off" aria-label="Search downloads" />
+        </label>
+        <select id="dlSort" class="dl-sort" aria-label="Sort downloads">
+          <option value="new">Newest first</option>
+          <option value="old">Oldest first</option>
+          <option value="name">Name A–Z</option>
+          <option value="count">Most downloaded</option>
+        </select>
+      </div>
+
+      <div class="dl-filters reveal d2" id="dlFilters" role="tablist" aria-label="Filter by file type"></div>
+
+      <p class="dl-count" id="dlCount" aria-live="polite"></p>
+      <div class="card-grid" id="dlGrid"></div>
+      <div class="dl-state" id="dlState" hidden></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="assets/js/omaccount-config.js"></script>
+  <script src="assets/js/nav-auth.js"></script>
+  <script src="downloads.js"></script>
+</body>
+</html>

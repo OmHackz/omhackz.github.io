@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mini Minecraft</title>
+  <meta name="description" content="Mini Minecraft — a tiny infinite world." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="assets/css/arcade.css" />
+  <link rel="stylesheet" href="assets/css/minecraft.css" />
+</head>
+<body>
+  <!-- LOADING -->
+  <div class="mc-boot" id="mcBoot" aria-hidden="true">
+    <div class="studio">OMHACKZ STUDIOS</div>
+    <p>presents</p>
+    <div class="loadbar"><i></i></div>
+  </div>
+
+  <!-- MAIN MENU -->
+  <div class="mc-menu" id="mcMenu" hidden>
+    <button class="mc-back" id="mcBackTop" type="button">← Back</button>
+    <h1>MINI<br />MINECRAFT</h1>
+    <div class="splash">Also try Lunix!</div>
+    <div class="mc-btns">
+      <button class="mcbtn primary" id="mcSingle" type="button">Singleplayer</button>
+      <button class="mcbtn" id="mcMulti" type="button" disabled>Multiplayer (nah)</button>
+    </div>
+    <p class="mc-foot">30 blocks · infinite worlds · no creepers (yet)</p>
+  </div>
+
+  <!-- WORLD SELECT -->
+  <div class="mc-worlds" id="mcWorlds" hidden>
+    <h2>Select World</h2>
+    <div class="world-list" id="worldList"></div>
+    <div class="world-new">
+      <input id="worldName" maxlength="24" placeholder="World name" autocomplete="off" />
+      <input id="worldSeed" placeholder="Seed (blank = random)" autocomplete="off" spellcheck="false" />
+      <button class="mcbtn primary" id="worldCreate" type="button">Create New World</button>
+    </div>
+    <button class="mcbtn" id="worldBack" type="button">Back</button>
+  </div>
+
+  <!-- GAME -->
+  <div class="mc-game" id="mcGame" hidden>
+    <header class="mc-top">
+      <strong id="mcWorldName">World</strong>
+      <div class="mc-chips">
+        <span><b id="mcFps">60</b> fps</span>
+        <span class="dim">mined <b id="mcMined">0</b></span>
+        <span class="dim" id="mcMode">Survival</span>
+      </div>
+      <div class="mc-topbtns">
+        <button id="mcPauseBtn" type="button" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg></button>
+        <button id="mcFSBtn" type="button" aria-label="Fullscreen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg></button>
+      </div>
+    </header>
+    <div class="mc-stage" id="mcScreen">
+      <canvas id="mcCanvas"></canvas>
+      <div class="mc-hud" id="mcHud">x 0 · y 0</div>
+      <div class="mc-hearts" id="mcHearts"></div>
+      <div class="mc-flash" id="mcFlash"></div>
+      <div class="mc-toast" id="mcStatus"></div>
+      <div class="mc-chat" id="mcChat">
+        <div class="mc-chat-log" id="mcChatLog"></div>
+        <div class="mc-chat-row" id="mcChatRow" hidden>
+          <span>&gt;</span>
+          <input id="mcChatInput" type="text" maxlength="120" placeholder="chat…  /help for commands" autocomplete="off" autocapitalize="off" spellcheck="false" />
+        </div>
+      </div>
+      <div class="mc-hotbar" id="mcHotbar"></div>
+      <div class="mc-inv" id="mcInv" hidden>
+        <div class="mc-inv-head">
+          <div class="mc-inv-title"><strong>Inventory</strong><span id="mcInvSub">→ hotbar slot 1</span></div>
+          <button type="button" id="mcInvClose" aria-label="Close inventory">✕</button>
+        </div>
+        <div class="mc-inv-grid" id="mcInvGrid"></div>
+      </div>
+      <div class="mc-touch" id="mcTouch">
+        <div class="mc-tgroup">
+          <button type="button" data-m="left" aria-label="Move left">◀</button>
+          <button type="button" data-m="right" aria-label="Move right">▶</button>
+        </div>
+        <div class="mc-tgroup">
+          <button type="button" data-m="tool" id="mcToolBtn" aria-label="Toggle mine or place">⛏</button>
+          <button type="button" data-m="jump" aria-label="Jump">▲</button>
+        </div>
+      </div>
+    </div>
+    <div class="mc-pause" id="mcPause" hidden>
+      <div class="pause-card">
+        <h2>Paused</h2>
+        <div class="seg" role="group" aria-label="Gamemode">
+          <button type="button" data-mc-mode="survival" class="is-on">Survival</button>
+          <button type="button" data-mc-mode="creative">Creative</button>
+        </div>
+        <div class="seg" role="group" aria-label="Render distance">
+          <button type="button" data-mc-dist="0">Cozy</button>
+          <button type="button" data-mc-dist="1" class="is-on">Normal</button>
+          <button type="button" data-mc-dist="2">Far</button>
+          <button type="button" data-mc-dist="3">Ultra</button>
+        </div>
+        <button class="mcbtn primary" id="mcResume" type="button">Back to Game</button>
+        <button class="mcbtn" id="mcRespawn" type="button">Respawn</button>
+        <button class="mcbtn" id="mcNewWorld" type="button">New Terrain</button>
+        <button class="mcbtn" id="mcQuit" type="button">Save &amp; Quit to Title</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/mc.js"></script>
+  <script src="assets/js/minecraft.js"></script>
+</body>
+</html>

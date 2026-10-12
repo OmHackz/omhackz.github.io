@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arcade — OmHackz</title>
+  <meta name="description" content="Three classics and a tiny infinite Minecraft demo." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <!-- universals -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- arcade-specific -->
+  <link rel="stylesheet" href="assets/css/arcade.css" />
+</head>
+<body data-page="games">
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="stage" aria-hidden="true">
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+  </div>
+
+  <header class="nav-wrap">
+    <nav class="glass-nav" aria-label="Primary">
+      <a href="index.html" class="brand" aria-label="Home">
+        <span class="brand-mark"><img src="assets/icon.png" alt="OmHackz logo" /></span>
+        <span class="brand-text">OmHackz</span>
+      </a>
+      <div class="links" id="navLinks">
+        <span class="nav-indicator" id="navIndicator"></span>
+        <a href="index.html" class="nav-link" data-page="home">Home</a>
+        <a href="projects.html" class="nav-link" data-page="projects">Projects</a>
+        <a href="downloads.html" class="nav-link" data-page="downloads">Downloads</a>
+        <a href="about.html" class="nav-link" data-page="about">About</a>
+        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="login.html" class="login-btn" id="navAuth" aria-label="Sign in">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6" /><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5" /></svg>
+          <span>Login</span>
+        </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Toggle theme">
+          <span class="toggle-track">
+            <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.4M12 19.1v2.4M4.3 4.3l1.7 1.7M18 18l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.3 19.7L6 18M18 6l1.7-1.7" /></svg>
+            <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.5A8.5 8.5 0 0 1 9.5 3.6a8.5 8.5 0 1 0 10.9 10.9Z" /></svg>
+          </span>
+        </button>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+    <div class="mobile-panel" id="mobilePanel">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="downloads.html" class="nav-link">Downloads</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+  </header>
+
+  <main id="app">
+    <section class="page arcade">
+      <div class="page-head reveal">
+        <p class="eyebrow">Off the record</p>
+        <h2 class="page-title">The <span class="gradient-text">Arcade</span></h2>
+        <p class="page-sub">Three classics and one tiny infinite world. Pick a cabinet and play.</p>
+      </div>
+
+      <!-- LIFETIME STATS -->
+      <div class="arcade-stats glass-card reveal d1" id="arcadeStats" aria-label="Lifetime scores">
+        <div class="arc-stat">
+          <span class="arc-stat-label">2048 best</span>
+          <span class="arc-stat-value" id="stat2048">0</span>
+        </div>
+        <span class="arc-stat-divider" aria-hidden="true"></span>
+        <div class="arc-stat">
+          <span class="arc-stat-label">Vs robot</span>
+          <span class="arc-stat-value" id="statTtt">0–0</span>
+        </div>
+        <span class="arc-stat-divider" aria-hidden="true"></span>
+        <div class="arc-stat">
+          <span class="arc-stat-label">Fields cleared</span>
+          <span class="arc-stat-value" id="statMines">0</span>
+        </div>
+        <span class="arc-stat-divider" aria-hidden="true"></span>
+        <div class="arc-stat">
+          <span class="arc-stat-label">Blocks mined</span>
+          <span class="arc-stat-value" id="statMc">0</span>
+        </div>
+      </div>
+
+      <!-- GAME PICKER -->
+      <div class="picker reveal d2" role="tablist" aria-label="Games">
+        <button class="game-tab is-active" data-game="mc" role="tab" aria-selected="true">
+          <span class="pick-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 9.5h16M9.5 9.5V20" /></svg>
+          </span>
+          <span class="pick-text"><strong>Mini Minecraft</strong><em>Infinite terrain demo</em></span>
+          <span class="pick-best" id="pickBestMc">0 mined</span>
+        </button>
+        <button class="game-tab" data-game="ttt" role="tab" aria-selected="false">
+          <span class="pick-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v16M15 4v16M4 9h16M4 15h16" /></svg>
+          </span>
+          <span class="pick-text"><strong>Tic Tac Toe</strong><em>You vs the robot</em></span>
+          <span class="pick-best" id="pickBestTtt">0W – 0L</span>
+        </button>
+        <button class="game-tab" data-game="mines" role="tab" aria-selected="false">
+          <span class="pick-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" /><circle cx="12" cy="12" r="3.2" /></svg>
+          </span>
+          <span class="pick-text"><strong>Minesweeper</strong><em>Clear the field, dodge 10 mines</em></span>
+          <span class="pick-best" id="pickBestMines">0 cleared</span>
+        </button>
+        <button class="game-tab" data-game="n2048" role="tab" aria-selected="false">
+          <span class="pick-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.6" /><rect x="13" y="4" width="7" height="7" rx="1.6" /><rect x="4" y="13" width="7" height="7" rx="1.6" /><rect x="13" y="13" width="7" height="7" rx="1.6" /></svg>
+          </span>
+          <span class="pick-text"><strong>2048</strong><em>Merge your way up</em></span>
+          <span class="pick-best" id="pickBest2048">Best 0</span>
+        </button>
+      </div>
+
+      <!-- MINI MINECRAFT -->
+      <div class="glass-card game-panel is-active" id="panel-mc" role="tabpanel" aria-label="Mini Minecraft">
+        <div class="cab-top">
+          <div class="cab-title">
+            <h3>Mini Minecraft</h3>
+            <p class="game-status" id="mcStatus">Survival — break blocks to collect them.</p>
+          </div>
+          <div class="cab-chips">
+            <span class="score-chip"><span id="mcFps">60</span>&nbsp;FPS</span>
+            <span class="score-chip dim">Mined <strong id="mcMined">0</strong></span>
+            <span class="score-chip dim">Mode <strong id="mcMode">Survival</strong></span>
+          </div>
+        </div>
+        <div class="cab-main">
+          <div class="screen screen-fit mc-screen" id="mcScreen">
+            <canvas id="mcCanvas"></canvas>
+            <div class="mc-hud" id="mcHud">x 0 · y 0</div>
+            <div class="mc-hearts" id="mcHearts"></div>
+            <div class="mc-flash" id="mcFlash"></div>
+            <div class="mc-chat" id="mcChat">
+              <div class="mc-chat-log" id="mcChatLog"></div>
+              <div class="mc-chat-row" id="mcChatRow" hidden>
+                <span>&gt;</span>
+                <input id="mcChatInput" type="text" maxlength="120" placeholder="chat…  /help for commands" autocomplete="off" autocapitalize="off" spellcheck="false" />
+              </div>
+            </div>
+            <div class="mc-hotbar" id="mcHotbar"></div>
+            <div class="mc-inv" id="mcInv" hidden>
+              <div class="mc-inv-head">
+                <div class="mc-inv-title"><strong>Inventory</strong><span id="mcInvSub">→ hotbar slot 1</span></div>
+                <button type="button" id="mcInvClose" aria-label="Close inventory">✕</button>
+              </div>
+              <div class="mc-inv-grid" id="mcInvGrid"></div>
+            </div>
+            <div class="mc-touch" id="mcTouch">
+              <div class="mc-tgroup">
+                <button type="button" data-m="left" aria-label="Move left">◀</button>
+                <button type="button" data-m="right" aria-label="Move right">▶</button>
+              </div>
+              <div class="mc-tgroup">
+                <button type="button" data-m="tool" id="mcToolBtn" aria-label="Toggle mine or place">⛏</button>
+                <button type="button" data-m="jump" aria-label="Jump">▲</button>
+              </div>
+            </div>
+          </div>
+          <aside class="cab-side">
+            <div class="seg" role="group" aria-label="Gamemode">
+              <button type="button" data-mc-mode="survival" class="is-on" aria-pressed="true">Survival</button>
+              <button type="button" data-mc-mode="creative" aria-pressed="false">Creative</button>
+            </div>
+            <div class="seg" role="group" aria-label="Render distance">
+              <button type="button" data-mc-dist="0" aria-pressed="false">Cozy</button>
+              <button type="button" data-mc-dist="1" aria-pressed="true" class="is-on">Normal</button>
+              <button type="button" data-mc-dist="2" aria-pressed="false">Far</button>
+              <button type="button" data-mc-dist="3" aria-pressed="false">Ultra</button>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-glass btn-sm" id="mcRespawn" type="button">Respawn</button>
+              <button class="btn btn-primary btn-sm" id="mcNewWorld" type="button">New world</button>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-glass btn-sm" id="mcInvBtn" type="button">Inventory (E)</button>
+              <button class="btn btn-glass btn-sm" id="mcFSBtn" type="button">Fullscreen (F)</button>
+            </div>
+            <div class="howto">
+              <p class="howto-title">How to play</p>
+              <ul>
+                <li><span><kbd>A</kbd><kbd>D</kbd> move · <kbd>Space</kbd> jump · <kbd>E</kbd> bag · <kbd>F</kbd> full</span></li>
+                <li><span><strong>Left-click</strong> (hold) to mine · <strong>Right-click</strong> to place</span></li>
+                <li><span><kbd>1</kbd>–<kbd>9</kbd> or wheel picks blocks · <kbd>N</kbd> gamemode · <kbd>T</kbd> chat</span></li>
+                <li><span>Stone → cobble · ores → stone, diamond keeps · bedrock is forever.</span></li>
+                <li><span>Long falls hurt in Survival · mined TNT goes <strong>boom</strong>.</span></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- TIC TAC TOE -->
+      <div class="glass-card game-panel" id="panel-ttt" role="tabpanel" aria-label="Tic Tac Toe">
+        <div class="cab-top">
+          <div class="cab-title">
+            <h3>Tic Tac Toe</h3>
+            <p class="game-status" id="tttStatus">You are X. The robot plays O — good luck.</p>
+          </div>
+          <div class="cab-chips">
+            <span class="score-chip" id="tttChipYou">You <strong id="tttYou">0</strong></span>
+            <span class="score-chip dim" id="tttChipRobot">Robot <strong id="tttRobot">0</strong></span>
+            <span class="score-chip dim">Draws <strong id="tttDraws">0</strong></span>
+          </div>
+        </div>
+        <div class="cab-main">
+          <div class="screen screen-fit">
+            <div class="ttt-wrap" id="tttWrap">
+              <div class="ttt-grid playable" id="tttGrid">
+                <button data-i="0" type="button" aria-label="Cell 1"></button><button data-i="1" type="button" aria-label="Cell 2"></button><button data-i="2" type="button" aria-label="Cell 3"></button>
+                <button data-i="3" type="button" aria-label="Cell 4"></button><button data-i="4" type="button" aria-label="Cell 5"></button><button data-i="5" type="button" aria-label="Cell 6"></button>
+                <button data-i="6" type="button" aria-label="Cell 7"></button><button data-i="7" type="button" aria-label="Cell 8"></button><button data-i="8" type="button" aria-label="Cell 9"></button>
+              </div>
+              <svg class="ttt-strike" id="tttStrike" aria-hidden="true"><line id="tttStrikeLine" x1="0" y1="0" x2="0" y2="0" /></svg>
+            </div>
+          </div>
+          <aside class="cab-side">
+            <div class="ttt-turn" id="tttTurn" aria-live="polite">
+              <span id="tttTurnYou" class="on"><i class="mx">X</i>You</span>
+              <span id="tttTurnRobot"><i class="mo">O</i>Robot</span>
+            </div>
+            <div class="seg" role="group" aria-label="Robot difficulty">
+              <button type="button" data-ttt-diff="easy" aria-pressed="false">Easy</button>
+              <button type="button" data-ttt-diff="medium" aria-pressed="true" class="is-on">Medium</button>
+              <button type="button" data-ttt-diff="hard" aria-pressed="false">Hard</button>
+            </div>
+            <button class="btn btn-primary btn-block" id="tttRestart" type="button">Restart</button>
+            <div class="howto">
+              <p class="howto-title">How to play</p>
+              <ul>
+                <li><span>Tap a square (or press <kbd>1</kbd>–<kbd>9</kbd>) to place your <strong>X</strong></span></li>
+                <li><span>Starter alternates every round — watch the turn pill</span></li>
+                <li><span>Hard never loses. Medium blunders. Easy naps.</span></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- MINESWEEPER -->
+      <div class="glass-card game-panel" id="panel-mines" role="tabpanel" aria-label="Minesweeper">
+        <div class="cab-top">
+          <div class="cab-title">
+            <h3>Minesweeper</h3>
+            <p class="game-status" id="minesStatus">Clear the field. Right-click (or Flag mode) to mark mines.</p>
+          </div>
+          <div class="cab-chips">
+            <span class="score-chip">Mines <strong id="minesLeft">10</strong></span>
+            <span class="score-chip dim">Cleared <strong id="minesWins">0</strong></span>
+          </div>
+        </div>
+        <div class="cab-main">
+          <div class="screen screen-fit">
+            <div class="mines-grid" id="minesGrid"></div>
+          </div>
+          <aside class="cab-side">
+            <div class="btn-row">
+              <button class="btn btn-glass btn-sm" id="minesFlag" type="button" aria-pressed="false">Flag: off</button>
+              <button class="btn btn-primary btn-sm" id="minesRestart" type="button">Restart</button>
+            </div>
+            <div class="howto">
+              <p class="howto-title">How to play</p>
+              <ul>
+                <li><span>Click to reveal — numbers count nearby mines</span></li>
+                <li><span>Right-click or Flag mode to mark suspects</span></li>
+                <li><span>First click is always safe</span></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- 2048 -->
+      <div class="glass-card game-panel" id="panel-n2048" role="tabpanel" aria-label="2048">
+        <div class="cab-top">
+          <div class="cab-title">
+            <h3>2048</h3>
+            <p class="game-status" id="n2048Status">Arrows / WASD or swipe. Merge your way to 2048.</p>
+          </div>
+          <div class="cab-chips">
+            <span class="score-chip">Score <strong id="n2048Score">0</strong></span>
+            <span class="score-chip dim">Best <strong id="n2048Best">0</strong></span>
+          </div>
+        </div>
+        <div class="cab-main">
+          <div class="screen screen-fit">
+            <div class="n2048-board" id="n2048Board"></div>
+          </div>
+          <aside class="cab-side">
+            <button class="btn btn-primary btn-block" id="n2048Start" type="button">New game</button>
+            <div class="dpad" data-dpad="n2048" aria-label="2048 controls">
+              <span></span><button data-dir="up" aria-label="Up" type="button">▲</button><span></span>
+              <button data-dir="left" aria-label="Left" type="button">◀</button><button data-dir="down" aria-label="Down" type="button">▼</button><button data-dir="right" aria-label="Right" type="button">▶</button>
+            </div>
+            <div class="howto">
+              <p class="howto-title">How to play</p>
+              <ul>
+                <li><span><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to slide</span></li>
+                <li><span>Matching tiles merge into their sum</span></li>
+                <li><span>Swipe on the board, or tap the pad</span></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <p class="arcade-foot reveal">High scores live in this browser — clear them by clearing site data.</p>
+    </section>
+  </main>
+
+  <!-- universals -->
+  <script src="script.js"></script>
+  <script src="assets/js/omaccount-config.js"></script>
+  <script src="assets/js/nav-auth.js"></script>
+  <!-- arcade-specific -->
+  <script src="assets/js/arcade.js"></script>
+  <script src="assets/js/mc.js"></script>
+</body>
+</html>

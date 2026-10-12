@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://omhackz.dev/downloads.schema.json",
+  "title": "OmHackz Downloads Feed",
+  "description": "Shape of the JSON stored in the npoint bin that powers downloads.html. The bin may hold either a bare array of items, or an object wrapping the array under 'items' or 'downloads'.",
+  "type": ["array", "object"],
+  "definitions": {
+    "item": {
+      "type": "object",
+      "required": ["id", "name", "type", "updated", "url"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "URL-safe slug, unique per item. Used as ?id= on download.html.",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "examples": ["nanomenu-v2"]
+        },
+        "name": { "type": "string", "description": "Display name.", "examples": ["NanoMenu"] },
+        "tagline": { "type": "string", "description": "One-line summary shown on cards.", "default": "" },
+        "type": {
+          "type": "string",
+          "description": "Filter category. Unknown values fall back to 'other'.",
+          "enum": ["minecraft", "app", "apk", "exe", "script", "other"],
+          "examples": ["minecraft"]
+        },
+        "file": {
+          "type": "string",
+          "description": "Real filename (extension drives the .ext badge).",
+          "examples": ["nanomenu-2.4.jar"]
+        },
+        "size": { "type": "string", "description": "Human-readable size.", "examples": ["184 KB"] },
+        "version": { "type": "string", "description": "Release version.", "examples": ["2.4.0"] },
+        "updated": {
+          "type": "string",
+          "description": "Upload date, ISO 8601 (YYYY-MM-DD). Used for display + newest/oldest sort.",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "examples": ["2026-09-12"]
+        },
+        "downloads": { "type": "integer", "minimum": 0, "description": "Download counter for 'most downloaded' sort.", "default": 0 },
+        "featured": { "type": "boolean", "description": "Featured items get a star badge.", "default": false },
+        "description": { "type": "string", "description": "Full details in Markdown, shown on the item page.", "default": "" },
+        "screenshots": {
+          "type": "array",
+          "description": "Image URLs for the item page gallery. Omit or leave empty when unavailable.",
+          "items": { "type": "string", "format": "uri" },
+          "default": []
+        },
+        "url": {
+          "type": "string",
+          "description": "Direct download link (http/https only — anything else is ignored).",
+          "format": "uri"
+        }
+      }
+    }
+  },
+  "anyOf": [
+    { "type": "array", "items": { "$ref": "#/definitions/item" } },
+    {
+      "type": "object",
+      "anyOf": [
+        { "required": ["items"], "properties": { "items": { "type": "array", "items": { "$ref": "#/definitions/item" } } } },
+        { "required": ["downloads"], "properties": { "downloads": { "type": "array", "items": { "$ref": "#/definitions/item" } } } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+name: Apply Supabase schema
+
+# Auto-applies supabase/schema.sql to the linked Supabase project
+# whenever the schema file changes (or on manual dispatch).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "supabase/schema.sql"
+      - ".github/workflows/supabase.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apply-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Link project
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_REF }}
+
+      # schema.sql is idempotent (create if not exists / drop-if-exists),
+      # but db push only applies NEW migrations — so every push gets a
+      # timestamped migration name to guarantee it runs.
+      - name: Stage migration
+        run: |
+          mkdir -p supabase/migrations
+          cp supabase/schema.sql "supabase/migrations/$(date -u +%Y%m%d%H%M%S)_omaccount.sql"
+
+      - name: Push schema
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: supabase db push

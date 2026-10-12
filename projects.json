@@ -1,0 +1,10 @@
+{
+  "user": "OmHackz",
+  "repos": [
+    { "repo": "Omrin", "tagline": "Featured build — live data loads from GitHub.", "featured": true },
+    "MangozWeb",
+    "Mangoz-Smp-App",
+    { "repo": "ArKey" },
+    { "repo": "Converter", "tagline": "A online converter." }
+  ]
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost? — OmHackz</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="r/redirect.css" />
+</head>
+<body data-page="missing">
+  <div class="stage" aria-hidden="true">
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+  </div>
+
+  <header class="redirect-top">
+    <a href="index.html" class="brand" aria-label="Back home">
+      <span class="brand-mark"><img src="assets/icon.png" alt="OmHackz logo" /></span>
+      <span class="brand-text">OmHackz</span>
+    </a>
+  </header>
+
+  <main id="app">
+    <section class="page">
+      <div class="glass-card redirect-card reveal">
+        <p class="eyebrow">404</p>
+        <h2>Nothing <span class="gradient-text">here</span></h2>
+        <p class="handle-line">This page drifted off the grid.</p>
+        <div class="redirect-actions">
+          <a class="btn btn-primary" href="index.html">Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    try {
+      const t = localStorage.getItem("theme");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+</body>
+</html>

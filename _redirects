@@ -1,0 +1,6 @@
+# Canonical pretty URLs (Cloudflare Pages).
+# Folder links like /r/github/ resolve natively; these tidy the page URLs.
+/index.html / 301
+/downloads.html /downloads 301
+/about.html /about 301
+/contact.html /contact 301

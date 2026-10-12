@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — OmHackz</title>
+  <meta name="description" content="Curated GitHub projects by OmHackz — browse repos and files." />
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="assets/css/projects.css" />
+</head>
+<body data-page="projects">
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="stage" aria-hidden="true">
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+  </div>
+
+  <header class="nav-wrap">
+    <nav class="glass-nav" aria-label="Primary">
+      <a href="index.html" class="brand" aria-label="Home">
+        <span class="brand-mark"><img src="assets/icon.png" alt="OmHackz logo" /></span>
+        <span class="brand-text">OmHackz</span>
+      </a>
+      <div class="links" id="navLinks">
+        <span class="nav-indicator" id="navIndicator"></span>
+        <a href="index.html" class="nav-link" data-page="home">Home</a>
+        <a href="projects.html" class="nav-link is-active" data-page="projects">Projects</a>
+        <a href="downloads.html" class="nav-link" data-page="downloads">Downloads</a>
+        <a href="about.html" class="nav-link" data-page="about">About</a>
+        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="login.html" class="login-btn" id="navAuth" aria-label="Sign in">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6" /><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5" /></svg>
+          <span>Login</span>
+        </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Toggle theme">
+          <span class="toggle-track">
+            <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.4M12 19.1v2.4M4.3 4.3l1.7 1.7M18 18l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.3 19.7L6 18M18 6l1.7-1.7" /></svg>
+            <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.5A8.5 8.5 0 0 1 9.5 3.6a8.5 8.5 0 1 0 10.9 10.9Z" /></svg>
+          </span>
+        </button>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+    <div class="mobile-panel" id="mobilePanel">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="projects.html" class="nav-link is-active">Projects</a>
+      <a href="downloads.html" class="nav-link">Downloads</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+  </header>
+
+  <main id="app">
+    <section class="page">
+      <div class="page-head reveal">
+        <p class="eyebrow">Projects</p>
+        <h2 class="page-title">Curated <span class="gradient-text">repos</span></h2>
+        <p class="page-sub">Only repos listed in <code>projects.json</code> appear here. Live stats from GitHub — pick one to browse its files.</p>
+      </div>
+
+      <div class="dl-toolbar reveal d1">
+        <label class="dl-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <input id="pjSearch" type="search" placeholder="Search projects…" autocomplete="off" aria-label="Search projects" />
+        </label>
+        <select id="pjSort" class="dl-sort" aria-label="Sort projects">
+          <option value="updated">Recently pushed</option>
+          <option value="stars">Most starred</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
+
+      <div class="dl-filters reveal d2" id="pjFilters" role="tablist" aria-label="Filter by language"></div>
+
+      <p class="pj-count" id="pjCount" aria-live="polite"></p>
+      <div class="pj-grid" id="pjGrid"></div>
+      <div class="dl-state" id="pjState" hidden></div>
+    </section>
+  </main>
+
+  <!-- File browser -->
+  <div class="pj-overlay" id="pjBrowser" hidden>
+    <div class="pj-win" role="dialog" aria-modal="true" aria-label="Repository file browser">
+      <div class="pj-bar">
+        <span class="pj-repo" id="pjRepoName">owner/repo</span>
+        <select class="pj-branch" id="pjBranch" aria-label="Branch"></select>
+        <button class="pj-icon-btn" id="pjCopyClone" title="Copy clone URL" aria-label="Copy clone URL"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg></button>
+        <a class="pj-icon-btn" id="pjOpenGh" href="#" target="_blank" rel="noopener" title="Open on GitHub" aria-label="Open on GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><path d="M15 3h6v6M10 14 21 3" /></svg></a>
+        <a class="pj-icon-btn" id="pjZip" href="#" title="Download ZIP" aria-label="Download ZIP"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 19h16" /></svg></a>
+        <button class="pj-icon-btn" id="pjClose" aria-label="Close file browser">✕</button>
+      </div>
+      <div class="pj-crumbs" id="pjCrumbs" aria-label="Path"></div>
+      <div class="pj-body">
+        <div class="pj-files" id="pjFiles" aria-label="Files"></div>
+        <div class="pj-preview" id="pjPreview" aria-live="polite"></div>
+      </div>
+      <p class="pj-status" id="pjStatus" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="assets/js/omaccount-config.js"></script>
+  <script src="assets/js/nav-auth.js"></script>
+  <script src="projects.js"></script>
+</body>
+</html>

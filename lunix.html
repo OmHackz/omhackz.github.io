@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Lunix</title>
+  <meta name="description" content="Lunix — a tiny secret desktop." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="stylesheet" href="assets/css/lunix.css" />
+</head>
+<body>
+  <div class="boot" id="boot" aria-hidden="true">
+    <svg class="boot-logo" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="38" height="38" rx="11" /><path d="m17 20 5 5-5 5M24 30h7" /></svg>
+    <div class="boot-bar"><i></i></div>
+    <p>lunix</p>
+  </div>
+
+  <header class="menubar">
+    <div class="mb-left">
+      <button class="mb-logo" id="mbLogo" aria-label="Lunix menu" aria-expanded="false">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="38" height="38" rx="11" /><path d="m17 20 5 5-5 5M24 30h7" /></svg>
+      </button>
+      <strong id="mbApp">Finder</strong>
+    </div>
+    <div class="mb-right">
+      <span class="mb-batt" id="mbBatt" hidden></span>
+      <svg class="mb-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2.5 9a15 15 0 0 1 19 0M5.5 12.5a10 10 0 0 1 13 0M8.6 16a5 5 0 0 1 6.8 0" /><circle cx="12" cy="19" r="1.4" fill="currentColor" stroke="none" /></svg>
+      <span id="mbClock">--:--</span>
+    </div>
+    <div class="mb-menu" id="mbMenu" hidden>
+      <button type="button" data-mb="about">About This Lunix</button>
+      <span class="mb-sep"></span>
+      <button type="button" data-mb="back">Back to Portfolio</button>
+      <button type="button" data-mb="shut">Shut Down…</button>
+    </div>
+  </header>
+
+  <main class="desktop" id="desktop">
+    <div class="dicons" id="dicons"></div>
+    <div class="wins" id="wins"></div>
+  </main>
+
+  <footer class="dock" id="dock"></footer>
+
+  <div class="shut" id="shut" hidden>
+    <p class="shut-msg">It is now safe to touch grass.</p>
+    <div class="shut-row">
+      <button type="button" id="shutReboot">Reboot</button>
+      <a href="index.html">Back to Portfolio</a>
+    </div>
+  </div>
+
+  <script src="assets/js/lunix.js"></script>
+</body>
+</html>

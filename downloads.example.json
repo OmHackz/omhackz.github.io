@@ -1,0 +1,80 @@
+[
+  {
+    "id": "nanomenu-v2",
+    "name": "NanoMenu",
+    "tagline": "A featherweight overlay menu for Minecraft 1.20+.",
+    "type": "minecraft",
+    "file": "nanomenu-2.4.jar",
+    "size": "184 KB",
+    "version": "2.4.0",
+    "updated": "2026-09-12",
+    "downloads": 1284,
+    "featured": true,
+    "description": "## NanoMenu\n\nA **tiny, fast** overlay menu for Minecraft `1.20+`. No config screens, no bloat.\n\n- Opens with a single keybind\n- Remembers your last menu\n- Works client-side only\n\n```\nDrop nanomenu-2.4.jar into /mods and launch.\n```\n\nMade for people who like their UI **quiet**.",
+    "screenshots": [
+      "https://picsum.photos/seed/nanomenu1/880/460",
+      "https://picsum.photos/seed/nanomenu2/880/460"
+    ],
+    "url": "https://example.com/files/nanomenu-2.4.jar"
+  },
+  {
+    "id": "pixel-desk",
+    "name": "PixelDesk",
+    "tagline": "A minimal always-on-top widget board for your desktop.",
+    "type": "app",
+    "file": "PixelDesk-1.1.zip",
+    "size": "8.2 MB",
+    "version": "1.1.0",
+    "updated": "2026-08-28",
+    "downloads": 342,
+    "featured": false,
+    "description": "## PixelDesk\n\nWidgets that stay **out of your way**: clock, notes, and a tiny launcher.\n\n- Transparent glass widgets\n- Zero installer — unzip and run\n- Remembers layout per monitor",
+    "screenshots": ["https://picsum.photos/seed/pixeldesk/880/460"],
+    "url": "https://example.com/files/PixelDesk-1.1.zip"
+  },
+  {
+    "id": "taplaunch-android",
+    "name": "TapLaunch",
+    "tagline": "Gesture launcher for Android — two taps to anything.",
+    "type": "apk",
+    "file": "taplaunch-3.0.apk",
+    "size": "4.6 MB",
+    "version": "3.0.1",
+    "updated": "2026-09-20",
+    "downloads": 891,
+    "featured": true,
+    "description": "## TapLaunch\n\nReplace your home screen with **two taps**.\n\n1. Draw a gesture\n2. The app opens\n\nNo accounts, no ads, no permissions beyond the obvious.",
+    "screenshots": [],
+    "url": "https://example.com/files/taplaunch-3.0.apk"
+  },
+  {
+    "id": "hashdrop-win",
+    "name": "HashDrop",
+    "tagline": "Drag a file, get every checksum instantly. Windows build.",
+    "type": "exe",
+    "file": "HashDrop-Setup-1.3.exe",
+    "size": "12.1 MB",
+    "version": "1.3.2",
+    "updated": "2026-07-04",
+    "downloads": 210,
+    "featured": false,
+    "description": "## HashDrop\n\n**MD5, SHA-1, SHA-256** in one drop.\n\n- Right-click context menu entry\n- Compare mode with `expected` paste box\n- Portable mode with `--portable`",
+    "screenshots": ["https://picsum.photos/seed/hashdrop/880/460"],
+    "url": "https://example.com/files/HashDrop-Setup-1.3.exe"
+  },
+  {
+    "id": "quickfetch",
+    "name": "quickfetch",
+    "tagline": "One-line system info, curl-installable anywhere.",
+    "type": "script",
+    "file": "install.sh",
+    "size": "6 KB",
+    "version": "0.9.4",
+    "updated": "2026-09-30",
+    "downloads": 1507,
+    "featured": false,
+    "description": "## quickfetch\n\nSystem info in **under 50ms**.\n\n```sh\ncurl -fsSL https://example.com/quickfetch/install.sh | sh\n```\n\nWorks on Linux, macOS, and WSL. Pipe it, alias it, forget it.",
+    "screenshots": [],
+    "url": "https://example.com/files/install.sh"
+  }
+]
