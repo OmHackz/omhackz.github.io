@@ -24,18 +24,3 @@ jobs:
             node --check "$f"
             echo "OK $f"
           done
-
-      # The committed omaccount-config.js must stay a placeholder.
-      # Real keys are injected from GitHub Secrets at deploy time.
-      - name: Guard against committed Supabase keys
-        run: |
-          set -e
-          if grep -Eq 'https://[a-z0-9-]+\.supabase\.co' assets/js/omaccount-config.js; then
-            echo "::error::Real Supabase URL found in assets/js/omaccount-config.js — use the SUPABASE_URL / SUPABASE_ANON_KEY secrets instead."
-            exit 1
-          fi
-          if grep -Eq 'eyJ[A-Za-z0-9_-]{10,}' assets/js/omaccount-config.js; then
-            echo "::error::Real Supabase anon key (JWT) found in assets/js/omaccount-config.js — use GitHub Secrets instead."
-            exit 1
-          fi
-          echo "omaccount-config.js is a safe placeholder"

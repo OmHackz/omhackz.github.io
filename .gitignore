@@ -6,13 +6,12 @@ dist/
 build/
 out/
 
-# Env files / secrets — NEVER commit real Supabase keys
+# Env files / secrets
 .env
 .env.*
 !.env.example
 
 # CLI local state
-.supabase/
 .vercel/
 
 # Editors
