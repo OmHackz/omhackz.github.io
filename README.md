@@ -1,5 +1,3 @@
-# OmHackz
-
 <p align="center">
   <img src="https://shieldcn.dev/header/gradient.svg?title=OmHackz&subtitle=Personal+website+and+project+hub&theme=violet&mode=light" alt="OmHackz" width="100%" />
 </p>
