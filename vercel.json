@@ -1,5 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/^\\/r\\/([^/.]+)\\/?$/", "dest": "/r/$1/index.html", "continue": false }
+  ]
 }
