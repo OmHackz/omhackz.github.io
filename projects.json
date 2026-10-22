@@ -2,9 +2,24 @@
   "user": "OmHackz",
   "repos": [
     { "repo": "Omrin", "tagline": "Featured build — live data loads from GitHub.", "featured": true },
+    { "repo": "iFetch", "tagline": "Fast system info fetcher.", "featured": true },
+    { "repo": "foo.ng", "tagline": "Free subdomains for everyone.", "featured": true },
+    { "repo": "is-a.dev", "tagline": "Grab your own sweet-looking '.is-a.dev' subdomain.", "featured": true },
+    { "repo": "open-webui", "tagline": "User-friendly AI interface for Ollama, OpenAI and more.", "featured": true },
+    { "repo": "OmAuthenticator", "tagline": "Just another 2FA Authenticator.", "featured": true },
     "MangozWeb",
     "Mangoz-Smp-App",
     { "repo": "ArKey" },
-    { "repo": "Converter", "tagline": "A online converter." }
+    { "repo": "Converter", "tagline": "A online converter." },
+    { "repo": "null_guesser" },
+    { "repo": "CamilionWeb" },
+    { "repo": "MCBot" },
+    { "repo": "Loaf-Pastes" },
+    { "repo": "OmManager" },
+    { "repo": "OmLabs" },
+    { "repo": "MC--Server", "tagline": "Paper Minecraft server made on GitHub." },
+    { "repo": "Wellcome-Bot", "tagline": "Welcomes every player joining a Minecraft server and logs them to Discord." },
+    { "repo": "MC-Server" },
+    { "repo": "InternetTest" }
   ]
 }
